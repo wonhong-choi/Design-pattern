@@ -1,1 +1,1 @@
-![jpg_1](./starbucks_classdiagram.jpg)
+![jpg_1](./Starbucks_ClassDiagram.jpg)
