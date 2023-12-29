@@ -1,28 +1,33 @@
 package Subjects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Datas.WeatherInfo;
-import Observers.Observer;
+import Observers.IObserver;
 
-public class WeatherData implements Subject{
-    private List<Observer> observers;
+public class WeatherData implements ISubject{
+    private List<IObserver> observers;
     private WeatherInfo weatherInfo;
+
+    public WeatherData(){
+        observers = new ArrayList<IObserver>();
+    }
     
     @Override
-    public void registerObserver(Observer o) {
+    public void registerObserver(IObserver o) {
         this.observers.add(o);
     }
 
     @Override
-    public void removeObserver(Observer o) {
+    public void removeObserver(IObserver o) {
         this.observers.remove(o);
     }
 
     @Override
     public void notifyObservers() {
-        for(Observer observer : observers){
-            observer.update(weatherInfo);
+        for(IObserver observer : observers){
+            observer.update(this);
         }
     }
 
@@ -30,7 +35,12 @@ public class WeatherData implements Subject{
         this.notifyObservers();
     }
 
-    public void setWeatherInfo(float temp, float humidity, float pressure){
-        this.weatherInfo.setWeatherInfo(temp, humidity, pressure);
+    public void setWeatherInfo(WeatherInfo weatherInfo){
+        this.weatherInfo = weatherInfo;
+        this.measurementChanged();
+    }
+
+    public WeatherInfo getWeahterInfo(){
+        return this.weatherInfo;
     }
 }

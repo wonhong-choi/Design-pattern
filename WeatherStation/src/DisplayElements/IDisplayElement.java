@@ -1,5 +1,5 @@
 package DisplayElements;
 
-public interface DisplayElement {
+public interface IDisplayElement {
     public abstract void display();
 }
